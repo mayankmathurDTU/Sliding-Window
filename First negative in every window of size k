@@ -1,0 +1,24 @@
+https://www.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1
+
+class Solution {
+  public:
+    vector<int> firstNegInt(vector<int>& arr, int k) {
+        int n = arr.size();
+        int i=0,j=0;
+        list<int> l;
+        vector<int> ans;
+        while(j<n){
+            if(arr[j]<0)l.push_back(arr[j]);
+            if(j-i+1==k){
+                if(l.size()==0)ans.push_back(0);
+                else{
+                    ans.push_back(l.front());
+                    if(l.front() == arr[i])l.pop_front();
+                }
+                i++;
+            }
+            j++;
+        }
+        return ans;
+    }
+};
