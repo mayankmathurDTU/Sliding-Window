@@ -1,0 +1,25 @@
+https://www.geeksforgeeks.org/problems/maximum-of-all-subarrays-of-size-k3101/1
+
+
+class Solution {
+  public:
+    vector<int> maxOfSubarrays(vector<int>& arr, int k) {
+        int n = arr.size();
+        vector<int> ans;
+        int i=0,j=0; list<int> l;
+        while(j<n){
+            while(!l.empty() && l.back()<arr[j]){
+                l.pop_back();
+            }
+            l.push_back(arr[j]);
+            if(j-i+1==k){
+                //cout<<"hi"<<endl;
+                ans.push_back(l.front());
+                if(l.front()==arr[i])l.pop_front();
+                i++;
+            }
+            j++;
+        }
+        return ans;
+    }
+};
