@@ -1,0 +1,35 @@
+https://leetcode.com/problems/fruit-into-baskets/
+
+class Solution {
+public:
+    int totalFruit(vector<int>& arr) {
+        int n = arr.size();
+        unordered_map<int,int> mp;
+        int i=0,j=0,count=0, ans =0;
+        while(j<n){
+            //cout<<"              "<<i<<" "<<j<<endl;
+            
+            if(mp.count(arr[j])==0)count++;
+            mp[arr[j]]++;
+            
+            if(count <= 2){
+                //cout<<i<<"_"<<j<<" count=2"<<endl;
+                ans=max(ans,j-i+1);
+            }
+            if(count>2){
+                //cout<<i<<"_"<<j<<" count>2"<<endl;
+                while(count>2){
+                    mp[arr[i]]--;
+                    if(mp[arr[i]]==0){
+                        mp.erase(arr[i]);
+                        count--;
+                    }
+                    i++;
+                }
+                //cout<<i<<"_"<<j<<" i inc"<<endl;
+            }
+            j++;
+        }
+        return ans;
+    }
+};
