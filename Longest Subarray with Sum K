@@ -1,0 +1,31 @@
+https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1
+
+class Solution {
+  public:
+    int longestSubarray(vector<int>& arr, int k) {
+        int n = arr.size();
+        unordered_map<int, int> mp; // sum->idx
+        int i=0,j=0,ans=0,sum=0;
+        while(j<n){
+            sum+=arr[j];
+            //cout<<i<<" "<<j<<" "<<sum<<" "<<sum-k<<endl;
+            if(sum==k){
+                //cout<<i<<"_"<<j<<" sum==k"<<endl;
+                ans = max(ans,j-i+1);
+            }
+            if(mp.count(sum-k)!=0){
+                //cout<<i<<"_"<<j<<" "<<mp[sum-k]<<" sum-k"<<endl;
+                ans = max(ans,j-mp[sum-k]); 
+            }
+            if(mp.count(sum)==0){
+                mp[sum]=j;
+            }
+            j++;
+        }
+        // cout<<"Printing Map"<<endl;
+        // for(auto it=mp.begin() ; it!=mp.end() ; it++){
+        //     cout<<it->first<<" -> "<<it->second<<endl;
+        // }
+        return ans;
+    }
+};
